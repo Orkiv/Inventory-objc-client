@@ -19,12 +19,12 @@ The SDK requires [**ARC (Automatic Reference Counting)**](http://stackoverflow.c
 Add the following to the Podfile:
 
 ```ruby
-pod 'SwaggerClient', :git => 'https://github.com//.git'
+pod 'SwaggerClient', :git => 'https://github.com//Orkiv/inventory-objc-client.git'
 ```
 
-To specify a particular branch, append `, :branch => 'branch-name-here'`
+To specify a particular branch, append `, :branch => 'master'`
 
-To specify a particular commit, append `, :commit => '11aa22'`
+
 
 ### Install from local path using [CocoaPods](https://cocoapods.org/)
 
