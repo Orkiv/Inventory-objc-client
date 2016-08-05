@@ -34,14 +34,17 @@
 */
 
 #import "INVCategory.h"
-#import "INVDictionary.h"
 #import "INVError.h"
 #import "INVEventRequest.h"
 #import "INVInventoryGroup.h"
 #import "INVItem.h"
+#import "INVItemRequest.h"
 #import "INVOrder.h"
+#import "INVOrderRequest.h"
 #import "INVResponse.h"
 #import "INVService.h"
+#import "INVServiceRequest.h"
+#import "INVVariation.h"
 
 
 

@@ -21,9 +21,9 @@ Pod::Spec.new do |s|
 
     s.framework    = 'SystemConfiguration'
 
-    s.homepage     = "ttps://github.com/Orkiv/Inventory-objc-client"
+    s.homepage     = "https://github.com/Orkiv/Inventory-php-client"
     s.license      = "Apache License, Version 2.0"
-    s.source       = { :git => "ttps://github.com/Orkiv/Inventory-objc-client.git", :tag => "#{s.version}" }
+    s.source       = { :git => "https://github.com/Orkiv/Inventory-php-client.git", :tag => "#{s.version}" }
     s.author       = { "Swagger" => "apiteam@swagger.io" }
 
     s.source_files = 'InventoryClient/**/*.{m,h}'

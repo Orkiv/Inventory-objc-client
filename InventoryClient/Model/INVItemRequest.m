@@ -1,6 +1,6 @@
-#import "INVDictionary.h"
+#import "INVItemRequest.h"
 
-@implementation INVDictionary
+@implementation INVItemRequest
 
 - (instancetype)init {
   self = [super init];
@@ -17,7 +17,7 @@
  * This method is used by `JSONModel`.
  */
 + (JSONKeyMapper *)keyMapper {
-  return [[JSONKeyMapper alloc] initWithDictionary:@{  }];
+  return [[JSONKeyMapper alloc] initWithDictionary:@{ @"id": @"_id", @"category": @"category", @"desc": @"desc", @"name": @"name", @"ordprice": @"ordprice", @"price": @"price", @"quantity": @"quantity" }];
 }
 
 /**
@@ -27,7 +27,7 @@
  */
 + (BOOL)propertyIsOptional:(NSString *)propertyName {
 
-  NSArray *optionalProperties = @[];
+  NSArray *optionalProperties = @[@"_id", @"category", @"desc", @"name", @"ordprice", @"price", @"quantity"];
   return [optionalProperties containsObject:propertyName];
 }
 

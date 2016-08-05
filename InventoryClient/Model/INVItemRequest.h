@@ -25,13 +25,12 @@
 * limitations under the License.
 */
 
-#import "INVVariation.h"
 
 
-@protocol INVItem
+@protocol INVItemRequest
 @end
 
-@interface INVItem : INVObject
+@interface INVItemRequest : INVObject
 
 /* ID of item [optional]
  */
@@ -51,16 +50,8 @@
 /* String value of price [optional]
  */
 @property(nonatomic) NSString* price;
-
-@property(nonatomic) NSArray<INVVariation>* variations;
 /* Inventory quantity [optional]
  */
 @property(nonatomic) NSString* quantity;
-/* Array of item media [optional]
- */
-@property(nonatomic) NSArray<NSString*>* media;
-/* Link to checkout page of item [optional]
- */
-@property(nonatomic) NSString* buy;
 
 @end

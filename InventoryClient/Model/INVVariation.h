@@ -25,42 +25,21 @@
 * limitations under the License.
 */
 
-#import "INVVariation.h"
 
 
-@protocol INVItem
+@protocol INVVariation
 @end
 
-@interface INVItem : INVObject
+@interface INVVariation : INVObject
 
-/* ID of item [optional]
- */
-@property(nonatomic) NSString* _id;
-/* Category ID of item [optional]
- */
-@property(nonatomic) NSString* category;
-/* Rich text description of item [optional]
- */
-@property(nonatomic) NSString* desc;
-/* Name of item [optional]
+/* Variation name [optional]
  */
 @property(nonatomic) NSString* name;
-/* Integer value of price [optional]
+/* New price to set if variation is set (in hundreds) [optional]
  */
-@property(nonatomic) NSNumber* ordprice;
-/* String value of price [optional]
+@property(nonatomic) NSNumber* priceChange;
+/* System ID of variation [optional]
  */
-@property(nonatomic) NSString* price;
-
-@property(nonatomic) NSArray<INVVariation>* variations;
-/* Inventory quantity [optional]
- */
-@property(nonatomic) NSString* quantity;
-/* Array of item media [optional]
- */
-@property(nonatomic) NSArray<NSString*>* media;
-/* Link to checkout page of item [optional]
- */
-@property(nonatomic) NSString* buy;
+@property(nonatomic) NSString* _id;
 
 @end

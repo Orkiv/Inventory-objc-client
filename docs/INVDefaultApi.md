@@ -11,17 +11,24 @@ Method | HTTP request | Description
 [**itemAddPost**](INVDefaultApi.md#itemaddpost) | **POST** /item/add/ | 
 [**itemAddbulkPost**](INVDefaultApi.md#itemaddbulkpost) | **POST** /item/addbulk/ | 
 [**itemDelete**](INVDefaultApi.md#itemdelete) | **DELETE** /item/ | 
+[**itemGet**](INVDefaultApi.md#itemget) | **GET** /item/ | 
+[**itemMediaDelete**](INVDefaultApi.md#itemmediadelete) | **DELETE** /item-media/ | 
+[**itemMediaPost**](INVDefaultApi.md#itemmediapost) | **POST** /item-media/ | 
 [**itemPut**](INVDefaultApi.md#itemput) | **PUT** /item/ | 
 [**itemsCountPost**](INVDefaultApi.md#itemscountpost) | **POST** /items/count/ | 
 [**itemsPost**](INVDefaultApi.md#itemspost) | **POST** /items/ | 
-[**itemsallfieldsPost**](INVDefaultApi.md#itemsallfieldspost) | **POST** /items/?allfields | 
 [**ordersPost**](INVDefaultApi.md#orderspost) | **POST** /orders/ | 
+[**ordersServicesPost**](INVDefaultApi.md#ordersservicespost) | **POST** /orders/services/ | 
 [**queryPost**](INVDefaultApi.md#querypost) | **POST** /query/ | 
-[**queryallfieldsPost**](INVDefaultApi.md#queryallfieldspost) | **POST** /query/?allfields | 
 [**servicesDelete**](INVDefaultApi.md#servicesdelete) | **DELETE** /services/ | 
 [**servicesGet**](INVDefaultApi.md#servicesget) | **GET** /services/ | 
+[**servicesOpenGet**](INVDefaultApi.md#servicesopenget) | **GET** /services/open/ | 
 [**servicesPost**](INVDefaultApi.md#servicespost) | **POST** /services/ | 
 [**servicesPut**](INVDefaultApi.md#servicesput) | **PUT** /services/ | 
+[**variationDelete**](INVDefaultApi.md#variationdelete) | **DELETE** /variation/ | 
+[**variationGet**](INVDefaultApi.md#variationget) | **GET** /variation/ | 
+[**variationPost**](INVDefaultApi.md#variationpost) | **POST** /variation/ | 
+[**variationPut**](INVDefaultApi.md#variationput) | **PUT** /variation/ | 
 [**writeDelete**](INVDefaultApi.md#writedelete) | **DELETE** /write/ | 
 [**writePost**](INVDefaultApi.md#writepost) | **POST** /write/ | 
 
@@ -142,7 +149,7 @@ Name | Type | Description  | Notes
 
 # **categoriesPost**
 ```objc
--(NSNumber*) categoriesPostWithQuery: (INVDictionary*) query
+-(NSNumber*) categoriesPostWithQuery: (INVCategory*) query
         completionHandler: (void (^)(NSArray<INVCategory>* output, NSError* error)) handler;
 ```
 
@@ -163,7 +170,7 @@ INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
 
 
-INVDictionary* query = [[INVDictionary alloc] init]; // Category to query against system (optional)
+INVCategory* query = [[INVCategory alloc] init]; // Category to query against system (optional)
 
 INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 
@@ -182,7 +189,7 @@ INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **query** | [**INVDictionary***](INVDictionary*.md)| Category to query against system | [optional] 
+ **query** | [**INVCategory***](INVCategory*.md)| Category to query against system | [optional] 
 
 ### Return type
 
@@ -266,7 +273,7 @@ Name | Type | Description  | Notes
 
 # **itemAddPost**
 ```objc
--(NSNumber*) itemAddPostWithItem: (INVItem*) item
+-(NSNumber*) itemAddPostWithItem: (INVItemRequest*) item
         completionHandler: (void (^)(INVItem* output, NSError* error)) handler;
 ```
 
@@ -287,7 +294,7 @@ INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
 
 
-INVItem* item = [[INVItem alloc] init]; // Item to create.
+INVItemRequest* item = [[INVItemRequest alloc] init]; // Item to create.
 
 INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 
@@ -306,7 +313,7 @@ INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **item** | [**INVItem***](INVItem*.md)| Item to create. | 
+ **item** | [**INVItemRequest***](INVItemRequest*.md)| Item to create. | 
 
 ### Return type
 
@@ -325,7 +332,7 @@ Name | Type | Description  | Notes
 
 # **itemAddbulkPost**
 ```objc
--(NSNumber*) itemAddbulkPostWithItems: (NSArray<INVItem>*) items
+-(NSNumber*) itemAddbulkPostWithItems: (NSArray<INVItemRequest>*) items
         completionHandler: (void (^)(INVResponse* output, NSError* error)) handler;
 ```
 
@@ -346,7 +353,7 @@ INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
 
 
-NSArray<INVItem>* items = @[[[INVItem alloc] init]]; // Items to create.
+NSArray<INVItemRequest>* items = @[[[INVItemRequest alloc] init]]; // Items to create.
 
 INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 
@@ -365,7 +372,7 @@ INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **items** | [**NSArray&lt;INVItem&gt;***](INVItem.md)| Items to create. | 
+ **items** | [**NSArray&lt;INVItemRequest&gt;***](INVItemRequest.md)| Items to create. | 
 
 ### Return type
 
@@ -441,10 +448,193 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **itemGet**
+```objc
+-(NSNumber*) itemGetWithId: (NSString*) _id
+        completionHandler: (void (^)(INVItem* output, NSError* error)) handler;
+```
+
+
+
+### Example 
+```objc
+INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: APIKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"APIKey"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"APIKey"];
+
+// Configure API key authorization: (authentication scheme: AccountID)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"accountid"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
+
+
+NSString* _id = @"_id_example"; // Item ID to open.
+
+INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
+
+[apiInstance itemGetWithId:_id
+          completionHandler: ^(INVItem* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling INVDefaultApi->itemGet: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **_id** | **NSString***| Item ID to open. | 
+
+### Return type
+
+[**INVItem***](INVItem.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [AccountID](../README.md#AccountID)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **itemMediaDelete**
+```objc
+-(NSNumber*) itemMediaDeleteWithImageurl: (NSString*) imageurl
+        completionHandler: (void (^)(INVResponse* output, NSError* error)) handler;
+```
+
+
+
+### Example 
+```objc
+INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: APIKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"APIKey"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"APIKey"];
+
+// Configure API key authorization: (authentication scheme: AccountID)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"accountid"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
+
+
+NSString* imageurl = @"imageurl_example"; // URL of image to remove
+
+INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
+
+[apiInstance itemMediaDeleteWithImageurl:imageurl
+          completionHandler: ^(INVResponse* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling INVDefaultApi->itemMediaDelete: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **imageurl** | **NSString***| URL of image to remove | 
+
+### Return type
+
+[**INVResponse***](INVResponse.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [AccountID](../README.md#AccountID)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **itemMediaPost**
+```objc
+-(NSNumber*) itemMediaPostWithId: (NSString*) _id
+    image: (NSURL*) image
+        completionHandler: (void (^)(NSString* output, NSError* error)) handler;
+```
+
+
+
+This endpoint is currently in testing.
+
+### Example 
+```objc
+INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: APIKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"APIKey"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"APIKey"];
+
+// Configure API key authorization: (authentication scheme: AccountID)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"accountid"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
+
+
+NSString* _id = @"_id_example"; // Valid item id to bind image to.
+NSURL* image = [NSURL fileURLWithPath:@"/path/to/file.txt"]; // Image.
+
+INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
+
+[apiInstance itemMediaPostWithId:_id
+              image:image
+          completionHandler: ^(NSString* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling INVDefaultApi->itemMediaPost: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **_id** | **NSString***| Valid item id to bind image to. | 
+ **image** | **NSURL***| Image. | 
+
+### Return type
+
+**NSString***
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [AccountID](../README.md#AccountID)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data, application/x-www-form-urlencoded
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **itemPut**
 ```objc
 -(NSNumber*) itemPutWithId: (NSString*) _id
-    item: (INVDictionary*) item
+    item: (INVItemRequest*) item
         completionHandler: (void (^)(INVResponse* output, NSError* error)) handler;
 ```
 
@@ -466,7 +656,7 @@ INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
 
 
 NSString* _id = @"_id_example"; // item id to update.
-INVDictionary* item = [[INVDictionary alloc] init]; // New item information.
+INVItemRequest* item = [[INVItemRequest alloc] init]; // New item information.
 
 INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 
@@ -487,7 +677,7 @@ INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **_id** | **NSString***| item id to update. | 
- **item** | [**INVDictionary***](INVDictionary*.md)| New item information. | 
+ **item** | [**INVItemRequest***](INVItemRequest*.md)| New item information. | 
 
 ### Return type
 
@@ -506,7 +696,9 @@ Name | Type | Description  | Notes
 
 # **itemsCountPost**
 ```objc
--(NSNumber*) itemsCountPostWithQuery: (INVDictionary*) query
+-(NSNumber*) itemsCountPostWithMinprice: (NSNumber*) minprice
+    maxprice: (NSNumber*) maxprice
+    query: (INVItemRequest*) query
         completionHandler: (void (^)(NSNumber* output, NSError* error)) handler;
 ```
 
@@ -527,11 +719,15 @@ INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
 
 
-INVDictionary* query = [[INVDictionary alloc] init]; // Item to query against system. (optional)
+NSNumber* minprice = @3.4; // Min price of items to find (optional)
+NSNumber* maxprice = @3.4; // Max price of items to find (optional)
+INVItemRequest* query = [[INVItemRequest alloc] init]; // Item to query against system. (optional)
 
 INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 
-[apiInstance itemsCountPostWithQuery:query
+[apiInstance itemsCountPostWithMinprice:minprice
+              maxprice:maxprice
+              query:query
           completionHandler: ^(NSNumber* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
@@ -546,7 +742,9 @@ INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **query** | [**INVDictionary***](INVDictionary*.md)| Item to query against system. | [optional] 
+ **minprice** | **NSNumber***| Min price of items to find | [optional] 
+ **maxprice** | **NSNumber***| Max price of items to find | [optional] 
+ **query** | [**INVItemRequest***](INVItemRequest*.md)| Item to query against system. | [optional] 
 
 ### Return type
 
@@ -565,7 +763,9 @@ Name | Type | Description  | Notes
 
 # **itemsPost**
 ```objc
--(NSNumber*) itemsPostWithQuery: (INVDictionary*) query
+-(NSNumber*) itemsPostWithMinprice: (NSNumber*) minprice
+    maxprice: (NSNumber*) maxprice
+    query: (INVItemRequest*) query
         completionHandler: (void (^)(NSArray<INVItem>* output, NSError* error)) handler;
 ```
 
@@ -586,11 +786,15 @@ INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
 
 
-INVDictionary* query = [[INVDictionary alloc] init]; // Item to query against system. (optional)
+NSNumber* minprice = @3.4; // Min price of items to find (optional)
+NSNumber* maxprice = @3.4; // Max price of items to find (optional)
+INVItemRequest* query = [[INVItemRequest alloc] init]; // Item to query against system. (optional)
 
 INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 
-[apiInstance itemsPostWithQuery:query
+[apiInstance itemsPostWithMinprice:minprice
+              maxprice:maxprice
+              query:query
           completionHandler: ^(NSArray<INVItem>* output, NSError* error) {
                         if (output) {
                             NSLog(@"%@", output);
@@ -605,7 +809,9 @@ INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **query** | [**INVDictionary***](INVDictionary*.md)| Item to query against system. | [optional] 
+ **minprice** | **NSNumber***| Min price of items to find | [optional] 
+ **maxprice** | **NSNumber***| Max price of items to find | [optional] 
+ **query** | [**INVItemRequest***](INVItemRequest*.md)| Item to query against system. | [optional] 
 
 ### Return type
 
@@ -622,68 +828,9 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **itemsallfieldsPost**
-```objc
--(NSNumber*) itemsallfieldsPostWithQuery: (INVDictionary*) query
-        completionHandler: (void (^)(NSArray<INVDictionary>* output, NSError* error)) handler;
-```
-
-
-
-### Example 
-```objc
-INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
-
-// Configure API key authorization: (authentication scheme: APIKey)
-[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"APIKey"];
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"APIKey"];
-
-// Configure API key authorization: (authentication scheme: AccountID)
-[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"accountid"];
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
-
-
-INVDictionary* query = [[INVDictionary alloc] init]; // Item to query against system. (optional)
-
-INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
-
-[apiInstance itemsallfieldsPostWithQuery:query
-          completionHandler: ^(NSArray<INVDictionary>* output, NSError* error) {
-                        if (output) {
-                            NSLog(@"%@", output);
-                        }
-                        if (error) {
-                            NSLog(@"Error calling INVDefaultApi->itemsallfieldsPost: %@", error);
-                        }
-                    }];
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **query** | [**INVDictionary***](INVDictionary*.md)| Item to query against system. | [optional] 
-
-### Return type
-
-[**NSArray<INVDictionary>***](INVDictionary.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey), [AccountID](../README.md#AccountID)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **ordersPost**
 ```objc
--(NSNumber*) ordersPostWithQuery: (INVDictionary*) query
+-(NSNumber*) ordersPostWithQuery: (INVOrderRequest*) query
         completionHandler: (void (^)(NSArray<INVOrder>* output, NSError* error)) handler;
 ```
 
@@ -704,7 +851,7 @@ INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
 
 
-INVDictionary* query = [[INVDictionary alloc] init]; // Order to query against system. (optional)
+INVOrderRequest* query = [[INVOrderRequest alloc] init]; // Order to query against item invoices. (optional)
 
 INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 
@@ -723,7 +870,66 @@ INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **query** | [**INVDictionary***](INVDictionary*.md)| Order to query against system. | [optional] 
+ **query** | [**INVOrderRequest***](INVOrderRequest*.md)| Order to query against item invoices. | [optional] 
+
+### Return type
+
+[**NSArray<INVOrder>***](INVOrder.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [AccountID](../README.md#AccountID)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ordersServicesPost**
+```objc
+-(NSNumber*) ordersServicesPostWithQuery: (INVOrderRequest*) query
+        completionHandler: (void (^)(NSArray<INVOrder>* output, NSError* error)) handler;
+```
+
+
+
+### Example 
+```objc
+INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: APIKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"APIKey"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"APIKey"];
+
+// Configure API key authorization: (authentication scheme: AccountID)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"accountid"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
+
+
+INVOrderRequest* query = [[INVOrderRequest alloc] init]; // Order to query against service invoices. (optional)
+
+INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
+
+[apiInstance ordersServicesPostWithQuery:query
+          completionHandler: ^(NSArray<INVOrder>* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling INVDefaultApi->ordersServicesPost: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **query** | [**INVOrderRequest***](INVOrderRequest*.md)| Order to query against service invoices. | [optional] 
 
 ### Return type
 
@@ -748,7 +954,7 @@ Name | Type | Description  | Notes
     search: (NSString*) search
     minprice: (NSNumber*) minprice
     maxprice: (NSNumber*) maxprice
-    query: (INVDictionary*) query
+    query: (INVItemRequest*) query
         completionHandler: (void (^)(NSArray<INVItem>* output, NSError* error)) handler;
 ```
 
@@ -773,9 +979,9 @@ NSNumber* page = @3.4; // Current page index. (optional)
 NSString* categoryid = @"categoryid_example"; // Get items under specified category id. (optional)
 NSString* sort = @"sort_example"; // Comma delimited Sort string. ie ; +ordprice. Please use number based fields only (optional)
 NSString* search = @"search_example"; // Performs a regex pattern match against the items within your account (optional)
-NSNumber* minprice = @3.4; // Min price in hundreds. (optional)
-NSNumber* maxprice = @3.4; // Max price in hudreds. (optional)
-INVDictionary* query = [[INVDictionary alloc] init]; // Custom parameters to query against system. (optional)
+NSNumber* minprice = @3.4; // Min price in hundreds (cents). (optional)
+NSNumber* maxprice = @3.4; // Max price in hundreds (cents). (optional)
+INVItemRequest* query = [[INVItemRequest alloc] init]; // Custom parameters to query against system. (optional)
 
 INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 
@@ -804,96 +1010,13 @@ Name | Type | Description  | Notes
  **categoryid** | **NSString***| Get items under specified category id. | [optional] 
  **sort** | **NSString***| Comma delimited Sort string. ie ; +ordprice. Please use number based fields only | [optional] 
  **search** | **NSString***| Performs a regex pattern match against the items within your account | [optional] 
- **minprice** | **NSNumber***| Min price in hundreds. | [optional] 
- **maxprice** | **NSNumber***| Max price in hudreds. | [optional] 
- **query** | [**INVDictionary***](INVDictionary*.md)| Custom parameters to query against system. | [optional] 
+ **minprice** | **NSNumber***| Min price in hundreds (cents). | [optional] 
+ **maxprice** | **NSNumber***| Max price in hundreds (cents). | [optional] 
+ **query** | [**INVItemRequest***](INVItemRequest*.md)| Custom parameters to query against system. | [optional] 
 
 ### Return type
 
 [**NSArray<INVItem>***](INVItem.md)
-
-### Authorization
-
-[APIKey](../README.md#APIKey), [AccountID](../README.md#AccountID)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **queryallfieldsPost**
-```objc
--(NSNumber*) queryallfieldsPostWithPage: (NSNumber*) page
-    categoryid: (NSString*) categoryid
-    sort: (NSString*) sort
-    search: (NSString*) search
-    minprice: (NSNumber*) minprice
-    maxprice: (NSNumber*) maxprice
-    query: (INVDictionary*) query
-        completionHandler: (void (^)(NSArray<INVDictionary>* output, NSError* error)) handler;
-```
-
-
-
-### Example 
-```objc
-INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
-
-// Configure API key authorization: (authentication scheme: APIKey)
-[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"APIKey"];
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"APIKey"];
-
-// Configure API key authorization: (authentication scheme: AccountID)
-[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"accountid"];
-// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
-
-
-NSNumber* page = @3.4; // Current page index. (optional)
-NSString* categoryid = @"categoryid_example"; // Get items under specified category id. (optional)
-NSString* sort = @"sort_example"; // Comma delimited Sort string. ie ; +ordprice. Please use number based fields only (optional)
-NSString* search = @"search_example"; // Performs a regex pattern match against the items within your account (optional)
-NSNumber* minprice = @3.4; // Min price in hundreds. (optional)
-NSNumber* maxprice = @3.4; // Max price in hudreds. (optional)
-INVDictionary* query = [[INVDictionary alloc] init]; // Custom parameters to query against system. (optional)
-
-INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
-
-[apiInstance queryallfieldsPostWithPage:page
-              categoryid:categoryid
-              sort:sort
-              search:search
-              minprice:minprice
-              maxprice:maxprice
-              query:query
-          completionHandler: ^(NSArray<INVDictionary>* output, NSError* error) {
-                        if (output) {
-                            NSLog(@"%@", output);
-                        }
-                        if (error) {
-                            NSLog(@"Error calling INVDefaultApi->queryallfieldsPost: %@", error);
-                        }
-                    }];
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **page** | **NSNumber***| Current page index. | [optional] 
- **categoryid** | **NSString***| Get items under specified category id. | [optional] 
- **sort** | **NSString***| Comma delimited Sort string. ie ; +ordprice. Please use number based fields only | [optional] 
- **search** | **NSString***| Performs a regex pattern match against the items within your account | [optional] 
- **minprice** | **NSNumber***| Min price in hundreds. | [optional] 
- **maxprice** | **NSNumber***| Max price in hudreds. | [optional] 
- **query** | [**INVDictionary***](INVDictionary*.md)| Custom parameters to query against system. | [optional] 
-
-### Return type
-
-[**NSArray<INVDictionary>***](INVDictionary.md)
 
 ### Authorization
 
@@ -1020,9 +1143,9 @@ This endpoint does not need any parameter.
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **servicesPost**
+# **servicesOpenGet**
 ```objc
--(NSNumber*) servicesPostWithService: (INVService*) service
+-(NSNumber*) servicesOpenGetWithId: (NSString*) _id
         completionHandler: (void (^)(INVService* output, NSError* error)) handler;
 ```
 
@@ -1043,7 +1166,66 @@ INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
 //[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
 
 
-INVService* service = [[INVService alloc] init]; // Service to create.
+NSString* _id = @"_id_example"; // ID of service to open
+
+INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
+
+[apiInstance servicesOpenGetWithId:_id
+          completionHandler: ^(INVService* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling INVDefaultApi->servicesOpenGet: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **_id** | **NSString***| ID of service to open | 
+
+### Return type
+
+[**INVService***](INVService.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [AccountID](../README.md#AccountID)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **servicesPost**
+```objc
+-(NSNumber*) servicesPostWithService: (INVServiceRequest*) service
+        completionHandler: (void (^)(INVService* output, NSError* error)) handler;
+```
+
+
+
+### Example 
+```objc
+INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: APIKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"APIKey"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"APIKey"];
+
+// Configure API key authorization: (authentication scheme: AccountID)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"accountid"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
+
+
+INVServiceRequest* service = [[INVServiceRequest alloc] init]; // Service to create.
 
 INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 
@@ -1062,7 +1244,7 @@ INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **service** | [**INVService***](INVService*.md)| Service to create. | 
+ **service** | [**INVServiceRequest***](INVServiceRequest*.md)| Service to create. | 
 
 ### Return type
 
@@ -1082,7 +1264,7 @@ Name | Type | Description  | Notes
 # **servicesPut**
 ```objc
 -(NSNumber*) servicesPutWithId: (NSString*) _id
-    service: (INVService*) service
+    service: (INVServiceRequest*) service
         completionHandler: (void (^)(INVResponse* output, NSError* error)) handler;
 ```
 
@@ -1104,7 +1286,7 @@ INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
 
 
 NSString* _id = @"_id_example"; // ID of the service to update
-INVService* service = [[INVService alloc] init]; // New service data to set.
+INVServiceRequest* service = [[INVServiceRequest alloc] init]; // New service data to set.
 
 INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 
@@ -1125,7 +1307,251 @@ INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **_id** | **NSString***| ID of the service to update | 
- **service** | [**INVService***](INVService*.md)| New service data to set. | 
+ **service** | [**INVServiceRequest***](INVServiceRequest*.md)| New service data to set. | 
+
+### Return type
+
+[**INVResponse***](INVResponse.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [AccountID](../README.md#AccountID)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **variationDelete**
+```objc
+-(NSNumber*) variationDeleteWithId: (NSString*) _id
+        completionHandler: (void (^)(INVResponse* output, NSError* error)) handler;
+```
+
+
+
+### Example 
+```objc
+INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: APIKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"APIKey"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"APIKey"];
+
+// Configure API key authorization: (authentication scheme: AccountID)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"accountid"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
+
+
+NSString* _id = @"_id_example"; // variation id to remove
+
+INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
+
+[apiInstance variationDeleteWithId:_id
+          completionHandler: ^(INVResponse* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling INVDefaultApi->variationDelete: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **_id** | **NSString***| variation id to remove | 
+
+### Return type
+
+[**INVResponse***](INVResponse.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [AccountID](../README.md#AccountID)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **variationGet**
+```objc
+-(NSNumber*) variationGetWithId: (NSString*) _id
+        completionHandler: (void (^)(INVVariation* output, NSError* error)) handler;
+```
+
+
+
+### Example 
+```objc
+INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: APIKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"APIKey"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"APIKey"];
+
+// Configure API key authorization: (authentication scheme: AccountID)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"accountid"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
+
+
+NSString* _id = @"_id_example"; // Variation ID to open.
+
+INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
+
+[apiInstance variationGetWithId:_id
+          completionHandler: ^(INVVariation* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling INVDefaultApi->variationGet: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **_id** | **NSString***| Variation ID to open. | 
+
+### Return type
+
+[**INVVariation***](INVVariation.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [AccountID](../README.md#AccountID)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **variationPost**
+```objc
+-(NSNumber*) variationPostWithId: (NSString*) _id
+    item: (INVVariation*) item
+        completionHandler: (void (^)(INVResponse* output, NSError* error)) handler;
+```
+
+
+
+### Example 
+```objc
+INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: APIKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"APIKey"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"APIKey"];
+
+// Configure API key authorization: (authentication scheme: AccountID)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"accountid"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
+
+
+NSString* _id = @"_id_example"; // Valid item id to bind variation to.
+INVVariation* item = [[INVVariation alloc] init]; // Variation information.
+
+INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
+
+[apiInstance variationPostWithId:_id
+              item:item
+          completionHandler: ^(INVResponse* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling INVDefaultApi->variationPost: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **_id** | **NSString***| Valid item id to bind variation to. | 
+ **item** | [**INVVariation***](INVVariation*.md)| Variation information. | 
+
+### Return type
+
+[**INVResponse***](INVResponse.md)
+
+### Authorization
+
+[APIKey](../README.md#APIKey), [AccountID](../README.md#AccountID)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **variationPut**
+```objc
+-(NSNumber*) variationPutWithId: (NSString*) _id
+    item: (INVVariation*) item
+        completionHandler: (void (^)(INVResponse* output, NSError* error)) handler;
+```
+
+
+
+### Example 
+```objc
+INVConfiguration *apiConfig = [INVConfiguration sharedConfig];
+
+// Configure API key authorization: (authentication scheme: APIKey)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"APIKey"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"APIKey"];
+
+// Configure API key authorization: (authentication scheme: AccountID)
+[apiConfig setApiKey:@"YOUR_API_KEY" forApiKeyIdentifier:@"accountid"];
+// Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+//[apiConfig setApiKeyPrefix:@"Bearer" forApiKeyIdentifier:@"accountid"];
+
+
+NSString* _id = @"_id_example"; // variation id to update.
+INVVariation* item = [[INVVariation alloc] init]; // New variation information.
+
+INVDefaultApi*apiInstance = [[INVDefaultApi alloc] init];
+
+[apiInstance variationPutWithId:_id
+              item:item
+          completionHandler: ^(INVResponse* output, NSError* error) {
+                        if (output) {
+                            NSLog(@"%@", output);
+                        }
+                        if (error) {
+                            NSLog(@"Error calling INVDefaultApi->variationPut: %@", error);
+                        }
+                    }];
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **_id** | **NSString***| variation id to update. | 
+ **item** | [**INVVariation***](INVVariation*.md)| New variation information. | 
 
 ### Return type
 

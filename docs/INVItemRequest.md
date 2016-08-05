@@ -1,4 +1,4 @@
-# INVItem
+# INVItemRequest
 
 ## Properties
 Name | Type | Description | Notes
@@ -9,10 +9,7 @@ Name | Type | Description | Notes
 **name** | **NSString*** | Name of item | [optional] 
 **ordprice** | **NSNumber*** | Integer value of price | [optional] 
 **price** | **NSString*** | String value of price | [optional] 
-**variations** | [**NSArray&lt;INVVariation&gt;***](INVVariation.md) |  | [optional] 
 **quantity** | **NSString*** | Inventory quantity | [optional] 
-**media** | **NSArray&lt;NSString*&gt;*** | Array of item media | [optional] 
-**buy** | **NSString*** | Link to checkout page of item | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

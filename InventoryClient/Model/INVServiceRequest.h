@@ -27,10 +27,22 @@
 
 
 
-@protocol INVDictionary
+@protocol INVServiceRequest
 @end
 
-@interface INVDictionary : NSMutableDictionary
+@interface INVServiceRequest : INVObject
 
+/* Name of service [optional]
+ */
+@property(nonatomic) NSString* name;
+/* Richtext description of item [optional]
+ */
+@property(nonatomic) NSString* desc;
+/* Upfront cost of service in hundreds [optional]
+ */
+@property(nonatomic) NSString* price;
+/* Recurring monthly cost of subscription [optional]
+ */
+@property(nonatomic) NSString* recurpric;
 
 @end

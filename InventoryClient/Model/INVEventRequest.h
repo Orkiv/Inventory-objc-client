@@ -25,7 +25,6 @@
 * limitations under the License.
 */
 
-#import "INVDictionary.h"
 
 
 @protocol INVEventRequest
@@ -39,7 +38,8 @@
 /* ServiceID to bind event to. [optional]
  */
 @property(nonatomic) NSString* serviceid;
-
-@property(nonatomic) INVDictionary* postbody;
+/* Valid JSON of Key-value parameters to post to url [optional]
+ */
+@property(nonatomic) NSString* postbody;
 
 @end
