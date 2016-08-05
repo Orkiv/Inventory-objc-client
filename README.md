@@ -19,7 +19,7 @@ The SDK requires [**ARC (Automatic Reference Counting)**](http://stackoverflow.c
 Add the following to the Podfile:
 
 ```ruby
-pod 'InventoryClient', :git => 'https://github.com/Orkiv/Inventory-javascript-client.git'
+pod 'InventoryClient', :git => 'https://github.com/Orkiv/Inventory-ruby-client.git'
 ```
 
 To specify a particular branch, append `, :branch => 'branch-name-here'`
